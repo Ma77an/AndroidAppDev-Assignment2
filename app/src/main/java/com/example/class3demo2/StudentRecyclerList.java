@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +39,9 @@ public class StudentRecyclerList extends AppCompatActivity {
             @Override
             public void onItemClick(int pos) {
                 Log.d("TAG", "onItemClick: " + pos);
+                Intent i = new Intent(getApplicationContext(), StudentDetailsActivity.class);
+                i.putExtra("pos", pos);
+                startActivity(i);
             }
         });
     }
