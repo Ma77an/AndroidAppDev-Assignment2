@@ -11,8 +11,9 @@ public class Model {
     }
 
     private Model() {
-        for (int i = 0; i < 20; i++) {
-            addStudent(new Student("name " + i, "" + i + i + i + i + i + i + i, "", "054" + i + i + i + i + i + i + i + i, false));
+        for (int i = 0; i < 10; i++) {
+            addStudent(new Student("name " + i, "" + i + i + i + i + i + i + i, "", "054" + i + i + i + i + i + i + i + i,
+                    "the" + i + " street, " + i + i + i + i + ".", false));
         }
     }
 
@@ -28,6 +29,10 @@ public class Model {
 
     public void addStudent(Student st) {
         data.add(st);
+    }
+    public void updateStudent(int pos, Student st){
+        data.remove(pos);
+        data.add(pos, st);
     }
 
 

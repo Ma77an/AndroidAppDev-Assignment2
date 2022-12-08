@@ -1,5 +1,6 @@
 package com.example.class3demo2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -51,8 +52,36 @@ public class StudentDetailsActivity extends AppCompatActivity {
             public void onClick(View view){
             Intent i = new Intent(getApplicationContext(), EditStudentActivity.class);
             i.putExtra("pos", finalPos);
-            startActivity(i);
+            startActivityForResult(i, 0);
+            onActivityResult(0, finalPos, null);
         }});
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int pos, @Nullable Intent data) {
+        super.onActivityResult(requestCode, pos, data);
+        setResult(pos);
+
+        Student st = Model.instance().getStudent(pos);
+        TextView nameTv = findViewById(R.id.details_name_tv);
+        TextView idTv = findViewById(R.id.details_id_tv);
+        TextView phoneTv = findViewById(R.id.details_phone_tv);
+        TextView addressTv = findViewById(R.id.details_address_tv);
+        CheckBox cb = findViewById(R.id.details_cb);
+        Button editBtn = findViewById(R.id.details_edit_btn);
+
+        nameTv.setText("Name: " + st.name);
+        idTv.setText("ID: " + st.id);
+        phoneTv.setText("Phone: " + st.phone);
+        addressTv.setText("Address: " + st.name + " street, " + st.name + ".");
+        cb.setChecked(st.cb);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

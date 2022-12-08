@@ -3,6 +3,7 @@ package com.example.class3demo2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -42,8 +43,28 @@ public class EditStudentActivity extends AppCompatActivity {
         nameEt.setText(st.name);
         idEt.setText(st.id);
         phoneEt.setText(st.phone);
-        addressEt.setText(st.name+" street, "+st.name+".");
+        addressEt.setText(st.address);
         cb.setChecked(st.cb);
+
+
+        Button saveBtn = findViewById(R.id.edit_save_btn);
+        Button deleteBtn = findViewById(R.id.edit_delete_btn);
+        Button cancelBtn = findViewById(R.id.edit_cancel_btn);
+
+        int finalPos = pos;
+        saveBtn.setOnClickListener(view -> {
+            st.name = nameEt.getText().toString();
+            st.id = idEt.getText().toString();
+            st.phone = phoneEt.getText().toString();
+            st.address = addressEt.getText().toString();
+            st.cb = cb.isChecked();
+
+            Model.instance().updateStudent(finalPos,st);
+            setResult(finalPos);
+            finish();
+        });
+
+
 
     }
 }

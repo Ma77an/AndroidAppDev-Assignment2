@@ -1,6 +1,7 @@
 package com.example.class3demo2;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import java.util.List;
 public class StudentRecyclerList extends AppCompatActivity {
 
     List<Student> data;
+    StudentRecyclerAdapter adapter = new StudentRecyclerAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,9 @@ public class StudentRecyclerList extends AppCompatActivity {
         list.setHasFixedSize(true);
 
         list.setLayoutManager(new LinearLayoutManager(this));
-        StudentRecyclerAdapter adapter = new StudentRecyclerAdapter();
+
         list.setAdapter(adapter);
+
 
         adapter.setOnItemClickListener(new onItemClickListener() {
             @Override
@@ -41,9 +44,16 @@ public class StudentRecyclerList extends AppCompatActivity {
                 Log.d("TAG", "onItemClick: " + pos);
                 Intent i = new Intent(getApplicationContext(), StudentDetailsActivity.class);
                 i.putExtra("pos", pos);
-                startActivity(i);
+                startActivityForResult(i,0);
+                onActivityResult(0,pos,null);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int pos, @Nullable Intent data) {
+        super.onActivityResult(requestCode, pos, data);
+        adapter.notifyItemChanged(pos);
     }
 
     class StudentViewHolder extends RecyclerView.ViewHolder {
