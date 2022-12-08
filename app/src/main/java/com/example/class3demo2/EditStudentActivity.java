@@ -15,12 +15,13 @@ import java.util.List;
 public class EditStudentActivity extends AppCompatActivity {
     List<Student> data;
 
+    int pos = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_student);
 
-        int pos = 0;
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -59,12 +60,26 @@ public class EditStudentActivity extends AppCompatActivity {
             st.address = addressEt.getText().toString();
             st.cb = cb.isChecked();
 
-            Model.instance().updateStudent(finalPos,st);
+            Model.instance().updateStudent(finalPos, st);
             setResult(finalPos);
             finish();
         });
 
+        cancelBtn.setOnClickListener(view -> {
+            setResult(finalPos);
+            finish();
+        });
 
+        deleteBtn.setOnClickListener(view -> {
+            Model.instance().deleteStudent(finalPos);
+            setResult(-finalPos);
+            finish();
+        });
+    }
 
+    @Override
+    public void onBackPressed() {
+        setResult(pos);
+        finish();
     }
 }

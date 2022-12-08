@@ -44,8 +44,8 @@ public class StudentRecyclerList extends AppCompatActivity {
                 Log.d("TAG", "onItemClick: " + pos);
                 Intent i = new Intent(getApplicationContext(), StudentDetailsActivity.class);
                 i.putExtra("pos", pos);
-                startActivityForResult(i,0);
-                onActivityResult(0,pos,null);
+                startActivityForResult(i, 0);
+                onActivityResult(0, pos, null);
             }
         });
     }
@@ -53,7 +53,11 @@ public class StudentRecyclerList extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int pos, @Nullable Intent data) {
         super.onActivityResult(requestCode, pos, data);
-        adapter.notifyItemChanged(pos);
+        if (pos < 0) {
+            adapter.notifyItemRemoved(-pos);
+        } else {
+            adapter.notifyItemChanged(pos);
+        }
     }
 
     class StudentViewHolder extends RecyclerView.ViewHolder {
