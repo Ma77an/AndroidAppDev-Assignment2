@@ -30,13 +30,9 @@ public class EditStudentActivity extends AppCompatActivity {
 
         Student st = Model.instance().getStudent(pos);
 
-        TextView nameTv = findViewById(R.id.edit_name_tv);
         TextView nameEt = findViewById(R.id.edit_name_et);
-        TextView idTv = findViewById(R.id.edit_id_tv);
         TextView idEt = findViewById(R.id.edit_id_et);
-        TextView phoneTv = findViewById(R.id.edit_phone_tv);
         TextView phoneEt = findViewById(R.id.edit_phone_et);
-        TextView addressTv = findViewById(R.id.edit_address_tv);
         TextView addressEt = findViewById(R.id.edit_address_et);
         CheckBox cb = findViewById(R.id.edit_cb);
 

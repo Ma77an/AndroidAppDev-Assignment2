@@ -14,6 +14,7 @@
         tools:targetApi="31">
         <activity
             android:name=".StudentDetailsActivity"
+            android:label="Student Details"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -21,6 +22,7 @@
         </activity>
         <activity
             android:name=".EditStudentActivity"
+            android:label="Edit Student"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -28,6 +30,7 @@
         </activity>
         <activity
             android:name=".StudentRecyclerList"
+            android:label="Students List"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -41,6 +44,7 @@
         </activity>
         <activity
             android:name=".AddStudentActivity"
+            android:label="New Student"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -27,8 +27,9 @@ public class Model {
         return data.get(pos);
     }
 
-    public void addStudent(Student st) {
+    public int addStudent(Student st) {
         data.add(st);
+        return data.indexOf(st);
     }
 
     public void deleteStudent(int pos) {

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.class3demo2.model.Model;
 import com.example.class3demo2.model.Student;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -28,15 +29,12 @@ public class StudentRecyclerList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_recycler_list);
-
         data = Model.instance().getAllStudents();
+
         RecyclerView list = findViewById(R.id.studentrecycler_list);
         list.setHasFixedSize(true);
-
         list.setLayoutManager(new LinearLayoutManager(this));
-
         list.setAdapter(adapter);
-
 
         adapter.setOnItemClickListener(new onItemClickListener() {
             @Override
@@ -48,15 +46,27 @@ public class StudentRecyclerList extends AppCompatActivity {
                 onActivityResult(0, pos, null);
             }
         });
+
+        FloatingActionButton addStudentBtn = findViewById(R.id.main_new_btn);
+
+        addStudentBtn.setOnClickListener(view -> {
+            Intent addIntent = new Intent(getApplicationContext(), AddStudentActivity.class);
+            startActivityForResult(addIntent, 1);
+            onActivityResult(1, 0, null);
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int pos, @Nullable Intent data) {
         super.onActivityResult(requestCode, pos, data);
-        if (pos < 0) {
-            adapter.notifyItemRemoved(-pos);
+        if (requestCode == 1) {
+            adapter.notifyDataSetChanged();
         } else {
-            adapter.notifyItemChanged(pos);
+            if (pos < 0) {
+                adapter.notifyItemRemoved(-pos);
+            } else {
+                adapter.notifyItemChanged(pos);
+            }
         }
     }
 
